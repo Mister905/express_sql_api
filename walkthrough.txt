@@ -1,0 +1,60 @@
+yarn init
+
+yard add express nanoid knex @vscode/sqlite3 express-validator
+
+touch server.js
+
+npx knex init   // creates knexfile.js
+
+npx knex migrate:make create_companies_table
+
+yarn migrate ( see migrations files for table schema details )
+
+npx knex migrate:make create_customers_table
+
+yarn migrate
+
+npx knex migrate:make create_products_table
+
+yarn migrate
+
+npx knex migrate:make create_sales_table
+
+yarn migrate
+
+mkdir models
+
+npx knex seed:make 001_companies
+
+npx knex seed:run
+
+
+
+
+
+Rollback Migration - I had to make changes to table schema - first call down to drop the old table then up with the updated schema
+
+npx knex migrate:down 20220221003810_create_companies_table.js
+
+npx knex migrate:up 20220221003810_create_companies_table.js
+
+
+npx knex migrate:down 20220221004451_create_customers_table.js
+
+npx knex migrate:up 20220221004451_create_customers_table.js
+
+
+npx knex migrate:down 20220221012812_create_products_table.js
+
+npx knex migrate:up 20220221012812_create_products_table.js
+
+
+npx knex migrate:down 20220221013130_create_sales_table.js
+
+npx knex migrate:up 20220221013130_create_sales_table.js
+
+
+
+npx knex seed:make 002_customers
+
+npx knex seed:run
